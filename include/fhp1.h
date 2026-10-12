@@ -77,4 +77,9 @@ const Fhp1SiteState *fhp1_grid_at_const(
     int y
 );
 
+int fhp1_grid_stream(
+    const Fhp1Grid *source,
+    Fhp1Grid *destination
+);
+
 #endif

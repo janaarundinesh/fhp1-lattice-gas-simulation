@@ -16,6 +16,7 @@ include(CTest)
 add_library(fhp1_core
     src/lattice.c
     src/grid.c
+    src/streaming.c
 )
 
 target_include_directories(fhp1_core
@@ -70,4 +71,14 @@ if(BUILD_TESTING)
     endif()
 
     add_test(NAME grid_tests COMMAND fhp1_grid_tests)
+
+    add_executable(fhp1_streaming_tests tests/test_streaming.c)
+    target_link_libraries(fhp1_streaming_tests PRIVATE fhp1_core)
+
+    if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
+        target_compile_options(fhp1_streaming_tests PRIVATE
+            -Wall -Wextra -Wpedantic)
+    endif()
+
+    add_test(NAME streaming_tests COMMAND fhp1_streaming_tests)
 endif()
