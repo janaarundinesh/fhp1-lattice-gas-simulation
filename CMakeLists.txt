@@ -51,4 +51,13 @@ if(BUILD_TESTING)
         NAME lattice_tests
         COMMAND fhp1_tests
     )
+
+    add_executable(fhp1_state_tests tests/test_state.c)
+    target_link_libraries(fhp1_state_tests PRIVATE fhp1_core)
+
+    if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
+        target_compile_options(fhp1_state_tests PRIVATE -Wall -Wextra -Wpedantic)
+    endif()
+
+    add_test(NAME state_tests COMMAND fhp1_state_tests)
 endif()
