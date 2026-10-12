@@ -15,6 +15,7 @@ include(CTest)
 
 add_library(fhp1_core
     src/lattice.c
+    src/grid.c
 )
 
 target_include_directories(fhp1_core
@@ -60,4 +61,13 @@ if(BUILD_TESTING)
     endif()
 
     add_test(NAME state_tests COMMAND fhp1_state_tests)
+
+    add_executable(fhp1_grid_tests tests/test_grid.c)
+    target_link_libraries(fhp1_grid_tests PRIVATE fhp1_core)
+
+    if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
+        target_compile_options(fhp1_grid_tests PRIVATE -Wall -Wextra -Wpedantic)
+    endif()
+
+    add_test(NAME grid_tests COMMAND fhp1_grid_tests)
 endif()

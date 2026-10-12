@@ -56,4 +56,25 @@ extern const int fhp1_dr[FHP1_NUM_DIRECTIONS];
  */
 int fhp1_opposite_direction(int direction);
 
+typedef struct {
+    int width;
+    int height;
+    Fhp1SiteState *cells;
+} Fhp1Grid;
+
+int fhp1_grid_init(Fhp1Grid *grid, int width, int height);
+void fhp1_grid_destroy(Fhp1Grid *grid);
+
+Fhp1SiteState *fhp1_grid_at(
+    Fhp1Grid *grid,
+    int x,
+    int y
+);
+
+const Fhp1SiteState *fhp1_grid_at_const(
+    const Fhp1Grid *grid,
+    int x,
+    int y
+);
+
 #endif
